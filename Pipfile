@@ -5,6 +5,8 @@ name = "pypi"
 
 [packages]
 django = ">=3.2.*"
+django-extensions = ">=3.1.*"
+pycountry = ">=20.7.*"
 
 [dev-packages]
 
