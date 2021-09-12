@@ -9,6 +9,7 @@ django-extensions = ">=3.1.*"
 pycountry = ">=20.7.*"
 
 [dev-packages]
+coverage = "*"
 
 [requires]
 python_version = "3.9"
