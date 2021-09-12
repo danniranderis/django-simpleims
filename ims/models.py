@@ -90,6 +90,7 @@ class Location(models.Model):
         max_digits=9,
         decimal_places=6,
         blank=True,
+        null=True,
         help_text=_('Optionally. Longitude as decimal up-to 6 decimals.'),
     )
     latitude = models.DecimalField(
@@ -97,6 +98,7 @@ class Location(models.Model):
         max_digits=9,
         decimal_places=6,
         blank=True,
+        null=True,
         help_text=_('Optionally. Latitude as decimal up-to 6 decimals.'),
     )
     parent_location = models.ForeignKey(
@@ -104,6 +106,7 @@ class Location(models.Model):
         on_delete=models.PROTECT,  # Disallow del if location has child's
         related_name='sub_locations',
         blank=True,
+        null=True,
         verbose_name=_('parent location'),
         help_text=_('locations can be marked as sub-locations '
                     'by providing a parent locations here.'),
@@ -167,6 +170,7 @@ class Item(models.Model):
         on_delete=models.PROTECT,  # Disallow del container if items is linked
         related_name='items',
         blank=True,
+        null=True,
         verbose_name=_('container'),
     )
     location = models.ForeignKey(
@@ -174,6 +178,7 @@ class Item(models.Model):
         on_delete=models.PROTECT,  # Disallow del location if items is linked
         related_name='items',
         blank=True,
+        null=True,
         verbose_name=_('location'),
         help_text=_('if item is linked to a container with a location, '
                     'there is no need to explicitly assign the item a '
