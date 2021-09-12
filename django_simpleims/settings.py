@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     # Application specific
     'users',
+    'ims',
 
     # Third-party apps
 ]
