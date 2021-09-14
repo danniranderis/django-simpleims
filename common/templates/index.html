@@ -1,0 +1,9 @@
+{% extends 'base_page.html' %}
+{% load i18n static %}
+
+{% block title %}{% trans 'Home' %} | {{ block.super }}{% endblock %}
+{% block page-title %}{% trans 'Home' %}{% endblock %}
+
+{% block page-content %}
+<p>This is a homepage.</p>
+{% endblock %}
