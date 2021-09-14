@@ -1,6 +1,10 @@
 from django.db import models
 from django_extensions.db.fields import AutoSlugField
 from django.utils.translation import gettext_lazy as _
+from django.urls import reverse
+
+
+IDENTIFIER_ENTITY_TYPES = ['location', 'container', 'item']
 
 
 class TypeAbstract(models.Model):
@@ -57,6 +61,34 @@ class Identifier(models.Model):
 
     def __str__(self):
         return str(self.identifier)
+
+    @property
+    def get_identifier_entity_type(self):
+        """
+        Return type of what the identifier is linked to.
+        E.g. Location, Container, Item
+        """
+        for iet in IDENTIFIER_ENTITY_TYPES:
+            if hasattr(self, iet):
+                return iet
+            return None
+
+    @property
+    def get_related_entity_pk(self):
+        """
+        Return pk of the linked entity.
+        """
+        if self.get_identifier_entity_type:
+            return eval('self.'+self.get_identifier_entity_type+'.pk')
+        return None
+
+    def get_absolute_url(self):
+        """
+        Return absolute url for object.
+        """
+        urlname = ['ims:', self.get_identifier_entity_type, ':detail']
+        return reverse(''.join(urlname),
+                       kwargs={'pk': self.get_related_entity_pk})
 
 
 class Location(models.Model):

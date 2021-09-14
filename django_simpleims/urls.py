@@ -23,6 +23,7 @@ from django.contrib.auth.decorators import login_required
 urlpatterns = [
     path('', login_required(TemplateView.as_view(template_name='index.html')),
          name='index'),
+    path('ims/', include('ims.urls')),
 
     # Auth patterns
     path('accounts/', include('django.contrib.auth.urls')),

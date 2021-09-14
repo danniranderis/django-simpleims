@@ -18,6 +18,63 @@ class IdentifierTestCase(TestCase):
         self.assertEqual(c152988d.__str__(),
                          'c152988d-c208-4442-b441-f1fdd4f1dcd9')
 
+    def test_entity_type_empty(self):
+        """
+        Test that a created identifier not linked to an entity, does not
+        return an entity-type.
+        """
+        c152988d = Identifier.objects.get(
+            pk='c152988d-c208-4442-b441-f1fdd4f1dcd9')
+        self.assertIsNone(c152988d.get_identifier_entity_type)
+
+    def test_entity_type_location(self):
+        """
+        Test that a created identifier linked to a location, does
+        return an entity-type of 'location'.
+        """
+        c152988d = Identifier.objects.get(
+            pk='c152988d-c208-4442-b441-f1fdd4f1dcd9')
+        location_type = LocationType.objects.create(name='test-type')
+        Location.objects.create(identifier=c152988d,
+                                location_type=location_type,
+                                name='test-location')
+        i = Identifier.objects.get(pk='c152988d-c208-4442-b441-f1fdd4f1dcd9')
+        self.assertEqual(i.get_identifier_entity_type, 'location')
+
+    def test_entity_pk_empty(self):
+        """
+        Test get_related_entity_pk with an identifier with no linked entity.
+        """
+        c152988d = Identifier.objects.get(
+            pk='c152988d-c208-4442-b441-f1fdd4f1dcd9')
+        self.assertIsNone(c152988d.get_related_entity_pk)
+
+    def test_entity_pk_location(self):
+        """
+        Test get_related_entity_pk with an identifier linked to a location.
+        """
+        c152988d = Identifier.objects.get(
+            pk='c152988d-c208-4442-b441-f1fdd4f1dcd9')
+        location_type = LocationType.objects.create(name='test-type')
+        Location.objects.create(identifier=c152988d,
+                                location_type=location_type,
+                                name='test-location')
+        i = Identifier.objects.get(pk='c152988d-c208-4442-b441-f1fdd4f1dcd9')
+        self.assertEqual(i.get_related_entity_pk, 1)
+
+    def test_identifier_absolute_url(self):
+        """
+        Test get_absolute_url for an identifier with a location linked.
+        """
+        c152988d = Identifier.objects.get(
+            pk='c152988d-c208-4442-b441-f1fdd4f1dcd9')
+        location_type = LocationType.objects.create(name='test-type')
+        Location.objects.create(identifier=c152988d,
+                                location_type=location_type,
+                                name='test-location')
+        i = Identifier.objects.get(pk='c152988d-c208-4442-b441-f1fdd4f1dcd9')
+        self.assertEqual(i.get_absolute_url(), '/ims/location/1/')
+
 
 class LocationTypeTestCase(TestCase):
     def test_location_type_obj_string(self):
