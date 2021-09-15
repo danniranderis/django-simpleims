@@ -1,0 +1,13 @@
+{% load i18n static %}
+
+<div class="col-lg-6">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">{% trans 'Container' %}</h6>
+        </div>
+        <div class="card-body">
+            <p><strong>{% trans 'Container type:' %}</strong> {{ object.container_type }}</p>
+            {% trans 'None' as default_none %}
+        </div>
+    </div>
+</div>

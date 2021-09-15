@@ -1,0 +1,37 @@
+{% extends 'base_page.html' %}
+{% load i18n static %}
+
+{% block title %}{{ object }} | {{ detail_name|capfirst }} | {{ block.super }}{% endblock %}
+{% block page-title %}{{ detail_name|capfirst }} | {{ object }}{% endblock %}
+
+{% block page-btn %}
+    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+        <i class="fas fa-edit fa-sm text-white-50"></i> {% trans 'Edit' %}
+    </a>
+{% endblock %}
+
+{% block page-content %}
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">{% trans 'Descriptive information' %}</h6>
+                </div>
+                <div class="card-body">
+                    <p><strong>{{ object.name }}</strong></p>
+                    <p>{{ object.description }}</p>
+                </div>
+            </div>
+        </div>
+
+        {% if detail_type == 'location' %}
+            {% include 'detail_parts/location_details.html' %}
+        {% endif %}
+        {% if detail_type == 'container' %}
+            {% include 'detail_parts/container_details.html' %}
+        {% endif %}
+        {% if detail_type == 'item' %}
+            {% include 'detail_parts/item_details.html' %}
+        {% endif %}
+    </div>
+{% endblock %}

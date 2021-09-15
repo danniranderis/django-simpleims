@@ -2,6 +2,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views.generic import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.utils.translation import ugettext_lazy as _
 from django.urls import reverse
 from .models import Identifier, Location, Container, Item
 
@@ -27,21 +28,45 @@ class LocationView(LoginRequiredMixin, DetailView):
     """
     Class-based built-in view for viewing Location-obj.
     """
-    context_object_name = 'location'
+    template_name = 'detail_view.html'
+    context_object_name = 'object'
     model = Location
+
+    def get_context_data(self, **kwargs):
+        """ Extend context-data """
+        context = super().get_context_data(**kwargs)
+        context['detail_type'] = 'location'
+        context['detail_name'] = _('location')
+        return context
 
 
 class ContainerView(LoginRequiredMixin, DetailView):
     """
     Class-based built-in view for viewing Container-obj.
     """
-    context_object_name = 'container'
+    template_name = 'detail_view.html'
+    context_object_name = 'object'
     model = Container
+
+    def get_context_data(self, **kwargs):
+        """ Extend context-data """
+        context = super().get_context_data(**kwargs)
+        context['detail_type'] = 'container'
+        context['detail_name'] = _('container')
+        return context
 
 
 class ItemView(LoginRequiredMixin, DetailView):
     """
     Class-based built-in view for viewing Item-obj.
     """
-    context_object_name = 'item'
+    template_name = 'detail_view.html'
+    context_object_name = 'object'
     model = Item
+
+    def get_context_data(self, **kwargs):
+        """ Extend context-data """
+        context = super().get_context_data(**kwargs)
+        context['detail_type'] = 'item'
+        context['detail_name'] = _('item')
+        return context

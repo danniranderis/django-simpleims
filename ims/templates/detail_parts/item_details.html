@@ -1,0 +1,20 @@
+{% load i18n static %}
+
+{% trans 'None' as default_none %}
+
+<div class="col-lg-6">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">{% trans 'Item' %}</h6>
+        </div>
+        <div class="card-body">
+            <p><strong>{% trans 'Container:' %}</strong> {{ object.container|default_if_none:default_none }}</p>
+            <p><strong>{% trans 'Location:' %}</strong> {{ object.location|default_if_none:default_none }}</p>
+            <p><strong>{% trans 'Tags:' %}</strong><br>
+                {% for tag in object.tags.all %}
+                    <span class="badge badge-info">{{ tag }}</span>
+                {% endfor %}
+            </p>
+        </div>
+    </div>
+</div>
