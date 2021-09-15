@@ -8,11 +8,11 @@ location_patterns = [
 ]
 
 container_patterns = [
-    path('<pk>/', LocationView.as_view(), name='detail'),
+    path('<pk>/', ContainerView.as_view(), name='detail'),
 ]
 
 item_patterns = [
-    path('<pk>/', LocationView.as_view(), name='detail'),
+    path('<pk>/', ItemView.as_view(), name='detail'),
 ]
 
 urlpatterns = [
