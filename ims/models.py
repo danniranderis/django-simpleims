@@ -71,7 +71,7 @@ class Identifier(models.Model):
         for iet in IDENTIFIER_ENTITY_TYPES:
             if hasattr(self, iet):
                 return iet
-            return None
+        return None
 
     @property
     def get_related_entity_pk(self):
