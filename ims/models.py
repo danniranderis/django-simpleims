@@ -147,6 +147,13 @@ class Location(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        """
+        Return absolute url for object.
+        """
+        return reverse('ims:location:detail',
+                       kwargs={'pk': self.pk})
+
 
 class Container(models.Model):
     """
@@ -233,3 +240,10 @@ class Item(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        """
+        Return absolute url for object.
+        """
+        return reverse('ims:item:detail',
+                       kwargs={'pk': self.pk})

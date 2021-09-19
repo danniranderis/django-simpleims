@@ -5,7 +5,7 @@
     {# Sidebar - Brand #}
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
         <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-laugh-wink"></i>
+            <i class="fas fa-bowling-ball"></i>
         </div>
         <div class="sidebar-brand-text mx-3">{% trans 'SBT Lager' %}</div>
     </a>
@@ -19,9 +19,19 @@
 {#            <span>Dashboard</span></a>#}
 {#    </li>#}
     <li class="nav-item active">
+        <a class="nav-link" href="{% url 'ims:location:list' %}">
+            <i class="fas fa-fw fa-map"></i>
+            <span>{% trans 'Locations' %}</span></a>
+    </li>
+    <li class="nav-item active">
         <a class="nav-link" href="{% url 'ims:container:list' %}">
             <i class="fas fa-fw fa-box-open"></i>
             <span>{% trans 'Containers' %}</span></a>
+    </li>
+    <li class="nav-item active">
+        <a class="nav-link" href="{% url 'ims:item:list' %}">
+            <i class="fas fa-fw fa-dot-circle"></i>
+            <span>{% trans 'Items' %}</span></a>
     </li>
 
     {# Divider #}

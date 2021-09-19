@@ -72,9 +72,25 @@ class ItemView(LoginRequiredMixin, DetailView):
         return context
 
 
+class LocationListView(LoginRequiredMixin, ListView):
+    """
+    Class-based view for listing locations on the webpage.
+    """
+    template_name = 'location_list.html'
+    model = Location
+
+
 class ContainerListView(LoginRequiredMixin, ListView):
     """
     Class-based view for listing containers on the webpage.
     """
     template_name = 'container_list.html'
     model = Container
+
+
+class ItemListView(LoginRequiredMixin, ListView):
+    """
+    Class-based view for listing items on the webpage.
+    """
+    template_name = 'item_list.html'
+    model = Item

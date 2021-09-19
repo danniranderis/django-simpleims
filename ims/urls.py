@@ -1,10 +1,12 @@
 from django.urls import include, path
 from .views import (check_scanned_uuid, LocationView, ContainerView,
-                    ItemView, ContainerListView)
+                    ItemView, LocationListView, ContainerListView,
+                    ItemListView)
 
 app_name = 'ims'
 
 location_patterns = [
+    path('', LocationListView.as_view(), name='list'),
     path('<pk>/', LocationView.as_view(), name='detail'),
 ]
 
@@ -14,6 +16,7 @@ container_patterns = [
 ]
 
 item_patterns = [
+    path('', ItemListView.as_view(), name='list'),
     path('<pk>/', ItemView.as_view(), name='detail'),
 ]
 
