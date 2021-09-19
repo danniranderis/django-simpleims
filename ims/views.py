@@ -20,8 +20,8 @@ def check_scanned_uuid(request, uuid):
         identifier = Identifier.objects.get(pk=uuid)
         return HttpResponseRedirect(identifier.get_absolute_url())
     except Identifier.DoesNotExist:
-        # TODO: redirect to a create-view or snow creat btns.
-        pass
+        return HttpResponseRedirect(reverse('ims:create_selector',
+                                            args={uuid}))
 
 
 class LocationView(LoginRequiredMixin, DetailView):

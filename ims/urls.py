@@ -1,4 +1,6 @@
 from django.urls import include, path
+from django.views.generic import TemplateView
+from django.contrib.auth.decorators import login_required
 from .views import (check_scanned_uuid, LocationView, ContainerView,
                     ItemView, LocationListView, ContainerListView,
                     ItemListView)
@@ -23,6 +25,9 @@ item_patterns = [
 urlpatterns = [
     # path('', ),
     path('uuid/<uuid:uuid>/', check_scanned_uuid, name='scanned_uuid'),
+    path('uuid/<uuid:uuid>/create_selector/', login_required(
+        TemplateView.as_view(template_name='create_selector.html')),
+         name='create_selector'),
     path('locations/', include((location_patterns, 'ims'),
                                namespace='location')),
     path('containers/', include((container_patterns, 'ims'),
