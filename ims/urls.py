@@ -22,10 +22,10 @@ item_patterns = [
 
 urlpatterns = [
     # path('', ),
-    path('uuid/<uuid:uuid>', check_scanned_uuid, name='scanned_uuid'),
-    path('location/', include((location_patterns, 'ims'),
-                              namespace='location')),
-    path('container/', include((container_patterns, 'ims'),
-                               namespace='container')),
-    path('item/', include((item_patterns, 'ims'), namespace='item')),
+    path('uuid/<uuid:uuid>/', check_scanned_uuid, name='scanned_uuid'),
+    path('locations/', include((location_patterns, 'ims'),
+                               namespace='location')),
+    path('containers/', include((container_patterns, 'ims'),
+                                namespace='container')),
+    path('items/', include((item_patterns, 'ims'), namespace='item')),
 ]
