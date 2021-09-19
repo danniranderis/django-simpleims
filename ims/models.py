@@ -180,6 +180,15 @@ class Container(models.Model):
         related_name='containers',
         verbose_name=_('container type'),
     )
+    location = models.ForeignKey(
+        'ims.Location',
+        on_delete=models.PROTECT,  # Disallow del location if containers is
+        # linked
+        related_name='containers',
+        blank=True,
+        null=True,
+        verbose_name=_('location'),
+    )
 
     def __str__(self):
         return self.name
