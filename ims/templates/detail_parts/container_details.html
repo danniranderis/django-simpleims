@@ -6,8 +6,49 @@
             <h6 class="m-0 font-weight-bold text-primary">{% trans 'Container' %}</h6>
         </div>
         <div class="card-body">
-            <p><strong>{% trans 'Container type:' %}</strong> {{ object.container_type }}</p>
             {% trans 'None' as default_none %}
+            <p><strong>{% trans 'Container type:' %}</strong> {{ object.container_type|default_if_none:default_none }}</p>
+            <p><strong>{% trans 'Location:' %}</strong> {{ object.location|default_if_none:default_none }}</p>
+            <p><strong>{% trans 'Identifier' %}:</strong> {{ object.identifier }}</p>
         </div>
     </div>
 </div>
+
+{# Show childrens #}
+{% if object.items %}
+    <div class="col-lg-12">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">{% trans 'Content' %}</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable">
+                        <thead>
+                        <th>{% trans 'Name' %}</th>
+                        <th>{% trans 'Tags' %}</th>
+                        <th>{% trans 'Actions' %}</th>
+                        </thead>
+                        <tbody>
+                        {% for object in object.items.all %}
+                            <tr>
+                                <td>{{ object.name }}</td>
+                                <td>
+                                    {% if object.tags %}
+                                        {% for tag in object.tags.all %}
+                                            <a href="{{ object.tag.get_absolute_url }}" class="badge badge-info">{{ tag }}</a>
+                                        {% endfor %}
+                                    {% else %}
+                                        <span class="badge badge-light">{% trans 'Non' %}</span>
+                                    {% endif %}
+                                </td>
+                                <td><a href="{{ object.get_absolute_url }}" class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm"><i class="fas fa-eye fa-sm text-white-50"></i> {% trans 'View' %}</a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}

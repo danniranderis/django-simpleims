@@ -6,9 +6,10 @@
             <h6 class="m-0 font-weight-bold text-primary">{% trans 'Location' %}</h6>
         </div>
         <div class="card-body">
-            <p><strong>{% trans 'Location type:' %}</strong> {{ object.location_type }}</p>
             {% trans 'None' as default_none %}
+            <p><strong>{% trans 'Location type:' %}</strong> {{ object.location_type|default_if_none:default_none }}</p>
             <p><strong>{% trans 'Parent location:' %}</strong> {{ object.parent_location|default_if_none:default_none }}</p>
+            <p><strong>{% trans 'Identifier' %}:</strong> {{ object.identifier }}</p>
             {% if object.longitude and object.latitude %}
                 <a href="https://www.google.com/maps/place/{{ object.longitude }}+{{ object.latitude }}"
                    class="btn btn-info btn-icon-split btn-sm" target="_blank">
@@ -19,3 +20,73 @@
         </div>
     </div>
 </div>
+
+{# Show container childrens #}
+{% if object.containers.exists %}
+    <div class="col-lg-12">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">{% trans 'Content - containers' %}</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable">
+                        <thead>
+                        <th>{% trans 'Name' %}</th>
+                        <th>{% trans 'Type' %}</th>
+                        <th>{% trans 'Actions' %}</th>
+                        </thead>
+                        <tbody>
+                        {% for container in object.containers.all %}
+                            <tr>
+                                <td>{{ container.name }}</td>
+                                <td>{{ container.container_type }}</td>
+                                <td><a href="{{ container.get_absolute_url }}" class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm"><i class="fas fa-eye fa-sm text-white-50"></i> {% trans 'View' %}</a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+{# Show item childrens #}
+{% if object.items.exists %}
+    <div class="col-lg-12">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">{% trans 'Content - items' %}</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable2">
+                        <thead>
+                        <th>{% trans 'Name' %}</th>
+                        <th>{% trans 'Tags' %}</th>
+                        <th>{% trans 'Actions' %}</th>
+                        </thead>
+                        <tbody>
+                        {% for item in object.items.all %}
+                            <tr>
+                                <td>{{ item.name }}</td>
+                                <td>
+                                    {% if item.tags %}
+                                        {% for tag in item.tags.all %}
+                                            <a href="{{ item.tag.get_absolute_url }}" class="badge badge-info">{{ tag }}</a>
+                                        {% endfor %}
+                                    {% else %}
+                                        <span class="badge badge-light">{% trans 'Non' %}</span>
+                                    {% endif %}
+                                </td>
+                                <td><a href="{{ item.get_absolute_url }}" class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm"><i class="fas fa-eye fa-sm text-white-50"></i> {% trans 'View' %}</a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}

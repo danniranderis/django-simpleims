@@ -9,18 +9,26 @@
     <table class="table table-bordered" id="dataTable">
         <thead>
         <th>{% trans 'Name' %}</th>
-        <th>{% trans 'Type' %}</th>
         <th>{% trans 'Container' %}</th>
         <th>{% trans 'Location' %}</th>
+        <th>{% trans 'Tags' %}</th>
         <th>{% trans 'Actions' %}</th>
         </thead>
         <tbody>
         {% for object in object_list %}
             <tr>
                 <td>{{ object.name }}</td>
-                <td>{{ object.container_type }}</td>
-                <td>{% if object.container %}<a href="{{ object.container.get_absolute_url }}" class="badge badge-light">{% trans 'Yes' %}</a>{% else %}<span class="badge badge-light">{% trans 'No' %}</span>{% endif %}</td>
-                <td>{% if object.location %}<a href="{{ object.location.get_absolute_url }}" class="badge badge-light">{% trans 'Yes' %}</a>{% else %}<span class="badge badge-light">{% trans 'No' %}</span>{% endif %}</td>
+                <td>{% if object.container %}<a href="{{ object.container.get_absolute_url }}" class="badge badge-secondary">{{ object.container }}</a>{% else %}<span class="badge badge-light">{% trans 'No' %}</span>{% endif %}</td>
+                <td>{% if object.location %}<a href="{{ object.location.get_absolute_url }}" class="badge badge-secondary">{{ object.location }}</a>{% else %}<span class="badge badge-light">{% trans 'No' %}</span>{% endif %}</td>
+                <td>
+                    {% if object.tags %}
+                        {% for tag in object.tags.all %}
+                            <a href="{{ object.tag.get_absolute_url }}" class="badge badge-info">{{ tag }}</a>
+                        {% endfor %}
+                    {% else %}
+                        <span class="badge badge-light">{% trans 'Non' %}</span>
+                    {% endif %}
+                </td>
                 <td><a href="{{ object.get_absolute_url }}" class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm"><i class="fas fa-eye fa-sm text-white-50"></i> {% trans 'View' %}</a></td>
             </tr>
         {% endfor %}

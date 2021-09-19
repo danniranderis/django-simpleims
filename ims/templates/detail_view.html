@@ -1,6 +1,15 @@
 {% extends 'base_page.html' %}
 {% load i18n static %}
 
+{% block insert_in_header %}
+    <link href="{% static 'css/datatables/dataTables.bootstrap4.css' %}" rel="stylesheet">
+{% endblock %}
+{% block js-load-bottom %}
+    <script src="{% static 'js/datatables/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'js/datatables/dataTables.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'js/enable-datatables.js' %}"></script>
+{% endblock %}
+
 {% block title %}{{ object }} | {{ detail_name|capfirst }} | {{ block.super }}{% endblock %}
 {% block page-title %}{{ detail_name|capfirst }} | {{ object }}{% endblock %}
 

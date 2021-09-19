@@ -8,13 +8,14 @@
             <h6 class="m-0 font-weight-bold text-primary">{% trans 'Item' %}</h6>
         </div>
         <div class="card-body">
-            <p><strong>{% trans 'Container:' %}</strong> {{ object.container|default_if_none:default_none }}</p>
-            <p><strong>{% trans 'Location:' %}</strong> {{ object.location|default_if_none:default_none }}</p>
-            <p><strong>{% trans 'Tags:' %}</strong><br>
+            <p><strong>{% trans 'Container' %}:</strong> {{ object.container|default_if_none:default_none }}</p>
+            <p><strong>{% trans 'Location' %}:</strong> {{ object.location|default_if_none:default_none }}</p>
+            <p><strong>{% trans 'Tags' %}:</strong><br>
                 {% for tag in object.tags.all %}
-                    <span class="badge badge-info">{{ tag }}</span>
+                    <a href="{{ object.tag.get_absolute_url }}" class="badge badge-info">{{ tag }}</a>
                 {% endfor %}
             </p>
+            <p><strong>{% trans 'Identifier' %}:</strong> {{ object.identifier }}</p>
         </div>
     </div>
 </div>
