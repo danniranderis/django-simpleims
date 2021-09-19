@@ -13,10 +13,15 @@
     {# Divider #}
     <hr class="sidebar-divider my-0">
 
+{#    <li class="nav-item active">#}
+{#        <a class="nav-link" href="index.html">#}
+{#            <i class="fas fa-fw fa-tachometer-alt"></i>#}
+{#            <span>Dashboard</span></a>#}
+{#    </li>#}
     <li class="nav-item active">
-        <a class="nav-link" href="index.html">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard</span></a>
+        <a class="nav-link" href="{% url 'ims:container:list' %}">
+            <i class="fas fa-fw fa-box-open"></i>
+            <span>{% trans 'Containers' %}</span></a>
     </li>
 
     {# Divider #}

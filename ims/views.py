@@ -1,6 +1,6 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.views.generic import DetailView
+from django.views.generic import DetailView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.translation import ugettext_lazy as _
 from django.urls import reverse
@@ -70,3 +70,11 @@ class ItemView(LoginRequiredMixin, DetailView):
         context['detail_type'] = 'item'
         context['detail_name'] = _('item')
         return context
+
+
+class ContainerListView(LoginRequiredMixin, ListView):
+    """
+    Class-based view for listing containers on the webpage.
+    """
+    template_name = 'container_list.html'
+    model = Container
