@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views.generic import DetailView, ListView
-from django.views.generic.edit import UpdateView
+from django.views.generic.edit import UpdateView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.translation import ugettext_lazy as _
 from django.urls import reverse
@@ -138,3 +138,60 @@ class TagsAutocomplete(LoginRequiredMixin, autocomplete.Select2QuerySetView):
     """
     def get_queryset(self):
         return Tag.objects.all()
+
+
+class LocationCreateView(LoginRequiredMixin, CreateView):
+    """
+    Class-based view for creating new locations.
+    """
+    model = Location
+    fields = '__all__'
+    template_name = 'create_form.html'
+
+    def form_valid(self, form):
+        """
+        Override the default func for added features of creating identifiers.
+        """
+        identifier = Identifier.objects.create(pk=self.kwargs['uuid'])
+        self.object = form.save(commit=False)
+        self.object.identifier = identifier
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+
+class ContainerCreateView(LoginRequiredMixin, CreateView):
+    """
+    Class-based view for creating new containers.
+    """
+    model = Container
+    fields = '__all__'
+    template_name = 'create_form.html'
+
+    def form_valid(self, form):
+        """
+        Override the default func for added features of creating identifiers.
+        """
+        identifier = Identifier.objects.create(pk=self.kwargs['uuid'])
+        self.object = form.save(commit=False)
+        self.object.identifier = identifier
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+
+class ItemCreateView(LoginRequiredMixin, CreateView):
+    """
+    Class-based view for creating new items.
+    """
+    model = Item
+    form_class = ItemForm
+    template_name = 'create_form.html'
+
+    def form_valid(self, form):
+        """
+        Override the default func for added features of creating identifiers.
+        """
+        identifier = Identifier.objects.create(pk=self.kwargs['uuid'])
+        self.object = form.save(commit=False)
+        self.object.identifier = identifier
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())

@@ -16,17 +16,17 @@
             <div class="card shadow mb-4">
                 <div class="card-body">
                     <p>{% blocktrans %}Please select the type you want to create for the identifier you just scanned.{% endblocktrans %}</p>
-                    <a href="#" class="btn btn-info btn-icon-split">
+                    <a href="{% url 'ims:item:create' uuid %}" class="btn btn-info btn-icon-split">
                         <span class="icon text-white-50"><i class="fas fa-dot-circle"></i></span>
                         <span class="text">{% trans 'Create item' %}</span>
                     </a>
                     <div class="my-2"></div>
-                    <a href="#" class="btn btn-info btn-icon-split">
+                    <a href="{% url 'ims:container:create' uuid %}" class="btn btn-info btn-icon-split">
                         <span class="icon text-white-50"><i class="fas fa-box-open"></i></span>
                         <span class="text">{% trans 'Create container' %}</span>
                     </a>
                     <div class="my-2"></div>
-                    <a href="#" class="btn btn-info btn-icon-split">
+                    <a href="{% url 'ims:location:create' uuid %}" class="btn btn-info btn-icon-split">
                         <span class="icon text-white-50"><i class="fas fa-map"></i></span>
                         <span class="text">{% trans 'Create location' %}</span>
                     </a>
