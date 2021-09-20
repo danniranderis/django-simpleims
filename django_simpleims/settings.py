@@ -35,6 +35,10 @@ INTERNAL_IPS = [
 # Application definition
 
 INSTALLED_APPS = [
+    # Thrid-party apps required first
+    'dal',
+    'dal_select2',
+
     # Django
     'django.contrib.admin',
     'django.contrib.auth',

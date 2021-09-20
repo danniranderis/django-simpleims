@@ -5,7 +5,9 @@ from django.views.generic.edit import UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.translation import ugettext_lazy as _
 from django.urls import reverse
-from .models import Identifier, Location, Container, Item
+from dal import autocomplete
+from .models import Identifier, Location, Container, Item, Tag
+from .forms import ItemForm
 
 
 def check_scanned_uuid(request, uuid):
@@ -126,5 +128,13 @@ class ItemUpdateView(LoginRequiredMixin, UpdateView):
     Class-based view for editing items on the webpage.
     """
     model = Item
-    fields = '__all__'
+    form_class = ItemForm
     template_name = 'item_update_form.html'
+
+
+class TagsAutocomplete(LoginRequiredMixin, autocomplete.Select2QuerySetView):
+    """
+    View for getting results for tags-autocomplete DAL.
+    """
+    def get_queryset(self):
+        return Tag.objects.all()

@@ -1,6 +1,9 @@
 {% extends 'base_page.html' %}
 {% load i18n static bootstrap4 %}
 
+{% block insert_in_header %}{{ block.super }}{{ form.media.css }}{% endblock %}
+{% block js-load-bottom %}{{ block.super }}{{ form.media.js }}{% endblock %}
+
 {% block title %}{% trans 'Update' %} {{ object }} | {{ block.super }}{% endblock %}
 {% block page-title %}{% trans 'Update' %} {{ object }}{% endblock %}
 

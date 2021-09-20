@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from .views import (check_scanned_uuid, LocationView, ContainerView,
                     ItemView, LocationListView, ContainerListView,
                     ItemListView, LocationUpdateView, ContainerUpdateView,
-                    ItemUpdateView)
+                    ItemUpdateView, TagsAutocomplete)
 
 app_name = 'ims'
 
@@ -37,4 +37,6 @@ urlpatterns = [
     path('containers/', include((container_patterns, 'ims'),
                                 namespace='container')),
     path('items/', include((item_patterns, 'ims'), namespace='item')),
+    path('tags/autocomplete/', TagsAutocomplete.as_view(create_field='name'),
+         name='tag-autocomplete'),
 ]
