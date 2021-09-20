@@ -111,7 +111,7 @@ class LocationUpdateView(LoginRequiredMixin, UpdateView):
     """
     model = Location
     fields = '__all__'
-    template_name = 'location_update_form.html'
+    template_name = 'update_form.html'
 
 
 class ContainerUpdateView(LoginRequiredMixin, UpdateView):
@@ -120,7 +120,7 @@ class ContainerUpdateView(LoginRequiredMixin, UpdateView):
     """
     model = Container
     fields = '__all__'
-    template_name = 'container_update_form.html'
+    template_name = 'update_form.html'
 
 
 class ItemUpdateView(LoginRequiredMixin, UpdateView):
@@ -129,7 +129,7 @@ class ItemUpdateView(LoginRequiredMixin, UpdateView):
     """
     model = Item
     form_class = ItemForm
-    template_name = 'item_update_form.html'
+    template_name = 'update_form.html'
 
 
 class TagsAutocomplete(LoginRequiredMixin, autocomplete.Select2QuerySetView):
