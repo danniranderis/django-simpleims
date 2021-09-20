@@ -14,7 +14,7 @@
 {% block page-title %}{{ detail_name|capfirst }} | {{ object }}{% endblock %}
 
 {% block page-btn %}
-    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+    <a href="{{ update_btn_url }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
         <i class="fas fa-edit fa-sm text-white-50"></i> {% trans 'Edit' %}
     </a>
 {% endblock %}
