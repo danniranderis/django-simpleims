@@ -150,3 +150,14 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+####
+# Instance settings
+####
+
+INSTANCE_FQDN = 'https://example.com'
+INSTANCE_LABEL_TEXT = 'IMS ID'
+# In mm
+INSTANCE_LABEL_WIDTH = 38
+INSTANCE_LABEL_HEIGHT = 19
