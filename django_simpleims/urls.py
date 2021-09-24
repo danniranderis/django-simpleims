@@ -17,6 +17,7 @@ import debug_toolbar
 from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
+from django.conf.urls.static import static
 from django.views.generic import TemplateView
 from django.contrib.auth.decorators import login_required
 
@@ -25,14 +26,13 @@ urlpatterns = [
          name='index'),
     path('ims/', include('ims.urls')),
 
-    # Auth patterns
-    path('accounts/', include('django.contrib.auth.urls')),
-
-    # Admin
-    path('admin/', admin.site.urls),
+    path('accounts/', include('django.contrib.auth.urls')),  # Auth patterns
+    path('admin/', admin.site.urls),  # Admin
 ]
 
 if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
     urlpatterns += [
         path('__debug__/', include(debug_toolbar.urls)),
     ]

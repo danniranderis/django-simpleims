@@ -1,4 +1,4 @@
-{% load i18n static %}
+{% load i18n static thumbnail %}
 
 {% trans 'None' as default_none %}
 
@@ -19,3 +19,19 @@
         </div>
     </div>
 </div>
+
+{# List associated images #}
+{% if object.images.exists %}
+    <div class="col-lg-12">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">{% trans 'Images' %}</h6>
+            </div>
+            <div class="card-body">
+                {% for image in object.images.all %}
+                    <a href="{{ image.image.url }}"><img src="{{ image.image|thumbnail_url:'sixtyfour' }}" /></a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endif %}

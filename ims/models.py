@@ -2,6 +2,7 @@ from django.db import models
 from django_extensions.db.fields import AutoSlugField
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse
+from easy_thumbnails.fields import ThumbnailerImageField
 
 
 IDENTIFIER_ENTITY_TYPES = ['location', 'container', 'item']
@@ -256,3 +257,17 @@ class Item(models.Model):
         """
         return reverse('ims:item:detail',
                        kwargs={'pk': self.pk})
+
+
+class ItemImage(models.Model):
+    """
+    Model for images associated with an Item.
+    """
+    item = models.ForeignKey(
+        'ims.Item',
+        related_name='images',
+        on_delete=models.CASCADE,
+    )
+    image = ThumbnailerImageField(
+        upload_to='private/item_images'
+    )

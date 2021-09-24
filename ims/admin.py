@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import (LocationType, ContainerType, Tag, Location,
-                     Container, Item, Identifier)
+                     Container, Item, Identifier, ItemImage)
 
 
 @admin.register(LocationType)
@@ -28,9 +28,13 @@ class ContainerAdmin(admin.ModelAdmin):
     pass
 
 
+class ItemImageInlineAdmin(admin.StackedInline):
+    model = ItemImage
+
+
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
-    pass
+    inlines = [ItemImageInlineAdmin]
 
 
 @admin.register(Identifier)

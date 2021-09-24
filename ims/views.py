@@ -6,7 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.translation import ugettext_lazy as _
 from django.urls import reverse
 from dal import autocomplete
-from .models import Identifier, Location, Container, Item, Tag
+from .models import Identifier, Location, Container, Item, Tag, ItemImage
 from .forms import ItemForm
 
 
@@ -195,3 +195,23 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
         self.object.identifier = identifier
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())
+
+
+class AddItemImageView(LoginRequiredMixin, CreateView):
+    """
+    Class-based view for uploading images for Items.
+    """
+    model = ItemImage
+    fields = ['image']
+    template_name = 'create_form.html'
+
+    def form_valid(self, form):
+        """
+        Override the default func for defining the Item to associate image to.
+        """
+        item = Item.objects.get(pk=self.kwargs['pk'])
+        self.object = form.save(commit=False)
+        self.object.item = item
+        self.object.save()
+        return HttpResponseRedirect(reverse('ims:item:detail',
+                                            args={item.pk}))

@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     # Third-party apps
     'debug_toolbar',
     'bootstrap4',
+    'easy_thumbnails',  # Used for Django-filer
 ]
 
 MIDDLEWARE = [
@@ -138,6 +139,11 @@ USE_L10N = True
 USE_TZ = True
 
 
+# Media files
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
@@ -145,6 +151,12 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
+
+THUMBNAIL_ALIASES = {
+    '': {
+        'sixtyfour': {'size': (64, 64), 'crop': True},
+    },
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

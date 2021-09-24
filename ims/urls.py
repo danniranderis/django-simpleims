@@ -5,7 +5,7 @@ from .views import (check_scanned_uuid, LocationView, ContainerView,
                     ItemView, LocationListView, ContainerListView,
                     ItemListView, LocationUpdateView, ContainerUpdateView,
                     ItemUpdateView, TagsAutocomplete, LocationCreateView,
-                    ContainerCreateView, ItemCreateView)
+                    ContainerCreateView, ItemCreateView, AddItemImageView)
 
 app_name = 'ims'
 
@@ -27,6 +27,8 @@ item_patterns = [
     path('', ItemListView.as_view(), name='list'),
     path('<pk>/', ItemView.as_view(), name='detail'),
     path('<pk>/update/', ItemUpdateView.as_view(), name='update'),
+    path('<pk>/image_upload/', AddItemImageView.as_view(),
+         name='upload_image'),
     path('<uuid:uuid>/create/', ItemCreateView.as_view(), name='create'),
 ]
 
