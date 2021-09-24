@@ -110,7 +110,8 @@ class LocationUpdateView(LoginRequiredMixin, UpdateView):
     Class-based view for editing locations on the webpage.
     """
     model = Location
-    fields = '__all__'
+    fields = ['name', 'description', 'location_type', 'longitude',
+              'latitude', 'parent_location']
     template_name = 'update_form.html'
 
 
@@ -145,7 +146,8 @@ class LocationCreateView(LoginRequiredMixin, CreateView):
     Class-based view for creating new locations.
     """
     model = Location
-    fields = '__all__'
+    fields = ['name', 'description', 'location_type', 'longitude',
+              'latitude', 'parent_location']
     template_name = 'create_form.html'
 
     def form_valid(self, form):

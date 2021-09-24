@@ -101,7 +101,7 @@ class Location(models.Model):
         on_delete=models.CASCADE,  # Delete location if identifier is deleted
         related_name='location',
         verbose_name=_('identifier'),
-        editable=False,
+        blank=True,
     )
     name = models.CharField(
         _('location name'),
