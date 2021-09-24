@@ -174,3 +174,12 @@ INSTANCE_LABEL_TEXT = 'IMS ID'
 # In mm
 INSTANCE_LABEL_WIDTH = 38
 INSTANCE_LABEL_HEIGHT = 19
+
+
+####
+# Load local settings for this instance
+####
+try:
+    from django_simpleims.local_settings import *  # noqa
+except (ImportError, NameError):
+    pass
