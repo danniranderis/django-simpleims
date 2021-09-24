@@ -3,6 +3,7 @@ from django_extensions.db.fields import AutoSlugField
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse
 from easy_thumbnails.fields import ThumbnailerImageField
+from martor.models import MartorField
 
 
 IDENTIFIER_ENTITY_TYPES = ['location', 'container', 'item']
@@ -107,7 +108,7 @@ class Location(models.Model):
         _('location name'),
         max_length=100,
     )
-    description = models.TextField(
+    description = MartorField(
         _('description'),
         blank=True,
     )
@@ -171,7 +172,7 @@ class Container(models.Model):
         _('container name'),
         max_length=100,
     )
-    description = models.TextField(
+    description = MartorField(
         _('description'),
         blank=True,
     )
@@ -217,7 +218,7 @@ class Item(models.Model):
         _('item name'),
         max_length=100,
     )
-    description = models.TextField(
+    description = MartorField(
         _('description'),
         blank=True,
     )

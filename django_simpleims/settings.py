@@ -55,7 +55,8 @@ INSTALLED_APPS = [
     # Third-party apps
     'debug_toolbar',
     'bootstrap4',
-    'easy_thumbnails',  # Used for Django-filer
+    'easy_thumbnails',
+    'martor',
 ]
 
 MIDDLEWARE = [

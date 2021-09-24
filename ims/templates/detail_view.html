@@ -1,13 +1,23 @@
 {% extends 'base_page.html' %}
-{% load i18n static %}
+{% load i18n static martortags %}
 
 {% block insert_in_header %}
+    {{ block.super }}
     <link href="{% static 'css/datatables/dataTables.bootstrap4.css' %}" rel="stylesheet">
+    <link href="{% static 'plugins/css/ace.min.css' %}" type="text/css" media="all" rel="stylesheet" />
+    <link href="{% static 'martor/css/martor.bootstrap.min.css' %}" type="text/css" media="all" rel="stylesheet" />
 {% endblock %}
 {% block js-load-bottom %}
+    {{ block.super }}
     <script src="{% static 'js/datatables/jquery.dataTables.min.js' %}"></script>
     <script src="{% static 'js/datatables/dataTables.bootstrap4.min.js' %}"></script>
     <script src="{% static 'js/enable-datatables.js' %}"></script>
+    <script type="text/javascript" src="{% static 'plugins/js/highlight.min.js' %}"></script>
+    <script>
+        $('.martor-preview pre').each(function(i, block){
+            hljs.highlightBlock(block);
+        });
+    </script>
 {% endblock %}
 
 {% block title %}{{ object }} | {{ detail_name|capfirst }} | {{ block.super }}{% endblock %}
@@ -37,7 +47,7 @@
                 </div>
                 <div class="card-body">
                     <p><strong>{{ object.name }}</strong></p>
-                    <p>{{ object.description }}</p>
+                    <p>{{ object.description|safe_markdown }}</p>
                 </div>
             </div>
         </div>

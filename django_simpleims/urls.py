@@ -26,6 +26,7 @@ urlpatterns = [
          name='index'),
     path('ims/', include('ims.urls')),
 
+    path('martor/', include('martor.urls')),  # MD Editor
     path('accounts/', include('django.contrib.auth.urls')),  # Auth patterns
     path('admin/', admin.site.urls),  # Admin
 ]

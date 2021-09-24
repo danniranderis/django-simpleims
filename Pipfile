@@ -12,6 +12,7 @@ django-autocomplete-light = "==3.8.2"
 qrcode = "*"
 reportlab = "*"
 easy-thumbnails = ">=2.7.*"
+martor = ">=1.6.*"
 
 [dev-packages]
 coverage = "*"
