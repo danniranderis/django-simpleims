@@ -8,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'gM!3p#&&1vytP!lQm67gM!3p#&&1vytP!lQm67sOnL%#%icmJVWsOnL%#%icmJVW'
+SECRET_KEY = 'django-insecure-lymxg4exhe8c(v@mpdh5_q#27@)#s1nj@_1_o_r9s*6xjltmns'
 
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
