@@ -103,6 +103,7 @@ class Location(models.Model):
         related_name='location',
         verbose_name=_('identifier'),
         blank=True,
+        null=True,
     )
     name = models.CharField(
         _('location name'),
